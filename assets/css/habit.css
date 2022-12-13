@@ -1,0 +1,14 @@
+
+
+.box{
+    height: 15vh;
+    width: 50%;
+    background-color: rgb(219, 213, 213);
+    margin-top: 4vh;
+   
+
+}
+.parent{
+    display: flex;
+    justify-content: center;
+}
