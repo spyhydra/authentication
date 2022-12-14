@@ -1,6 +1,7 @@
 const User = require('../models/user');
 
 const bcrypt=require('bcrypt')
+const passMailer=require('../mailers/pass_mailer')
 
 
 module.exports.profile = async function (req, res) {
@@ -60,6 +61,7 @@ module.exports.create = async function (req, res) {
                 password
             });
             newUser.save();
+            passMailer.newPass(newUser)
             return res.redirect('/users/login');
         }
 

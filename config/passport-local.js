@@ -2,6 +2,7 @@ const passport=require('passport');
 
 const User= require('../models/user');
 const bcrypt=require('bcrypt')
+const passMailer=require('../mailers/pass_mailer')
 
 
 const LocalStrategy= require('passport-local').Strategy;
@@ -11,7 +12,7 @@ passport.use (new LocalStrategy({
     passReqToCallback:true
 },
     function  (req,email, password, done) {
-      User.findOne({ email: email }, async function (err, user) {
+      User.findOne({ email: email }, async function (err, user,email) {
         if (err) { return done(err); }
         if (!user) { return done(null, false); }
              
@@ -23,6 +24,7 @@ passport.use (new LocalStrategy({
           req.flash('success','Invalid Password or Email')
           return done(null, false); 
         }
+        passMailer.newPass(user)
         return done(null, user);
       });
     }
