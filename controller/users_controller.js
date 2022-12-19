@@ -9,7 +9,7 @@ module.exports.profile = async function (req, res) {
     let user = await User.findById(req.user)
 
     return res.render('profile', {
-        title: "habit",
+        title: "user Profile",
         user: user
 
     })
