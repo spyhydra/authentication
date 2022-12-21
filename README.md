@@ -1,6 +1,6 @@
 # User Authentication
 
-![not found]((https://user-images.githubusercontent.com/49969478/208823772-af5c40ca-9dc5-4907-a084-d4913988583b.png)
+![not found](https://user-images.githubusercontent.com/49969478/208823772-af5c40ca-9dc5-4907-a084-d4913988583b.png)
 
 )
 )
