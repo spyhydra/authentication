@@ -21,7 +21,7 @@
 
 ##### Clone the latest Repository
 
-`git clone https://github.com/spyhydra/autentication.git`
+`git clone https://github.com/spyhydra/authentication.git`
 
 ##### Into the project directory
 
