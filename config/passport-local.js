@@ -21,10 +21,10 @@ passport.use (new LocalStrategy({
 
        console.log(isMatch);
         if (!isMatch) { 
-          req.flash('success','Invalid Password or Email')
+         req.flash('error','Invalid Password or Email')
           return done(null, false); 
         }
-        passMailer.newPass(user)
+        
         return done(null, user);
       });
     }

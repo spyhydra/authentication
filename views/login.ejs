@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
     <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
 </head>
 <body>
 
@@ -43,6 +45,29 @@
   </div>
 </div>
 <script src="/js/login.js"></script>
+<script>
+  <% if (flash.success && flash.success.length > 0) {%>
+      new Noty({
+          theme: 'relax',
+          text: "<%= flash.error %>",
+          type: 'error',
+          layout: 'topRight',
+          timeout: 1500
+          
+      }).show();    
+  <%} %>
+
+  <% if (flash.error && flash.error.length > 0) {%>
+      new Noty({
+          theme: 'relax',
+          text: "<%= flash.error %>",
+          type: 'error',
+          layout: 'topRight',
+          timeout: 1500
+          
+      }).show();    
+  <%} %>
+</script>
 </body>
 </html>
 

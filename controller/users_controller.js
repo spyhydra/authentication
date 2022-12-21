@@ -36,6 +36,7 @@ module.exports.signUp = function (req, res) {
 module.exports.signIn = function (req, res) {
     if (req.isAuthenticated()) {
         req.flash('success', 'login successfully')
+   
         return res.redirect('/users/profile')
     }
     return res.render('login')
@@ -63,7 +64,7 @@ module.exports.create = async function (req, res) {
                 password
             });
             newUser.save();
-            passMailer.newPass(newUser)
+            req.flash('success', 'signup successfully')
             return res.redirect('/users/login');
         }
 
@@ -115,16 +116,20 @@ module.exports.resetPassword = async (req, res) => {
         if (isMatch) {
             const a = await bcrypt.hash(newPassword, 10);
           
-
+                 
             console.log(a);
+           
+           
             const update = await User.updateOne({
                 email
             }, {
                 $set: {
                     password: a
                 }
-
+                
             })
+            
+            req.flash('error', 'Reset password successfully')
             
             
         }
@@ -163,6 +168,7 @@ module.exports.forgetPassword = async function (req, res) {
         const updatePassword= await bcrypt.hash(pass,10);
   const user=await User.findOne({email})
   passMailer.newPass(user,pass)
+  
   const updatePass = await User.updateOne({
     email
 },{
@@ -170,8 +176,9 @@ module.exports.forgetPassword = async function (req, res) {
         password: updatePassword
     }
     
-
+    
 })
+req.flash('success','Check your mail for password')
 console.log(updatePass);
 
     return res.render('login');
