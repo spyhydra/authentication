@@ -2,6 +2,8 @@ const User = require('../models/user');
 
 const bcrypt = require('bcrypt')
 const passMailer = require('../mailers/pass_mailer')
+const jwt=require('jsonwebtoken');
+
 
 
 module.exports.profile = async function (req, res) {
@@ -61,7 +63,7 @@ module.exports.create = async function (req, res) {
                 password
             });
             newUser.save();
-            // passMailer.newPass(newUser)
+            passMailer.newPass(newUser)
             return res.redirect('/users/login');
         }
 
@@ -93,14 +95,6 @@ module.exports.user = function (req, res) {
 
 }
 
-// .....................   forget password  ..................... 
-
-module.exports.forgetPassword = async function (req, res) {
-
-
-    return res.render('forgetpass');
-
-}
 
 
 // .....................   reset user password after login   ..................... 
@@ -155,3 +149,57 @@ module.exports.resetPasswords = (req, res) => {
     }
     return res.redirect('/users/login')
 }
+
+
+// .....................   forget password  ..................... 
+
+module.exports.forgetPassword = async function (req, res) {
+    
+    const email=req.body.email;
+    const pass =  randomPass(8); 
+    console.log(pass);
+    
+     try {
+        const updatePassword= await bcrypt.hash(pass,10);
+  const user=await User.findOne({email})
+  passMailer.newPass(user,pass)
+  const updatePass = await User.updateOne({
+    email
+},{
+    $set: {
+        password: updatePassword
+    }
+    
+
+})
+console.log(updatePass);
+
+    return res.render('login');
+        
+     } catch (error) {
+        if(error){
+            console.log(error);
+        }
+     }
+  
+}
+
+
+module.exports.forgetpass=function(req,res){
+    return res.render('forgetpass');
+}
+
+
+
+
+//function for generate random password
+function randomPass (length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
+

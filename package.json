@@ -18,6 +18,7 @@
     "express-ejs-layouts": "^2.5.1",
     "express-session": "^1.15.6",
     "hydra": "^1.9.2",
+    "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.11.0",
     "mongoose": "^6.0.0",
     "nodemailer": "^6.8.0",
