@@ -1,7 +1,7 @@
 const mongoose=require('mongoose');
 
 
-mongoose.connect('mongodb://localhost/try');
+mongoose.connect('mongodb+srv://chetan:IN0JSi0gM11dDQZj@cluster0.jdlc9ck.mongodb.net/?retryWrites=true&w=majority');
 
 const db=mongoose.connection;
 

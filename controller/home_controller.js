@@ -1,6 +1,6 @@
 module.exports.home = function(req, res){
     
-    return res.render('index', {
+    return res.render('login', {
         title: "Home"
     });
 }
